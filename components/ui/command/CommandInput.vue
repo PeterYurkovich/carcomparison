@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Search } from "lucide-vue-next";
 import { ComboboxInput, type ComboboxInputProps } from "radix-vue";
 
 const props = defineProps<ComboboxInputProps>();
@@ -13,7 +12,11 @@ export default {
 
 <template>
   <div class="flex items-center px-3 border-b" cmdk-input-wrapper>
-    <Search class="w-4 h-4 mr-2 opacity-50 shrink-0" />
+    <Icon
+      name="uil:search-alt"
+      class="w-4 h-4 mr-2 opacity-50 shrink-0"
+      color="white"
+    />
     <ComboboxInput
       v-bind="{ ...props, ...$attrs }"
       auto-focus

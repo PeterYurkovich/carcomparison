@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { SelectIcon, SelectTrigger, type SelectTriggerProps } from "radix-vue";
-import { ChevronDown } from "lucide-vue-next";
 
 const props = withDefaults(
   defineProps<SelectTriggerProps & { class?: string; invalid?: boolean }>(),
@@ -26,7 +25,7 @@ const props = withDefaults(
   >
     <slot />
     <SelectIcon as-child>
-      <ChevronDown class="w-4 h-4 opacity-50" />
+      <Icon name="uil:arrow-down" class="w-4 h-4 opacity-50" color="white" />
     </SelectIcon>
   </SelectTrigger>
 </template>

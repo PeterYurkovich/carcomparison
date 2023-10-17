@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { ChevronLeft, ChevronRight } from "lucide-vue-next";
 import { computed, nextTick, onMounted, ref } from "vue";
 import { buttonVariants } from "../button";
 import { DatePicker } from "v-calendar";
@@ -62,7 +61,7 @@ onMounted(async () => {
         "
         @click="handleNav('prev')"
       >
-        <ChevronLeft class="w-4 h-4" />
+        <Icon name="uil:arrow-left" class="w-4 h-4" color="white" />
       </UiButton>
       <UiButton
         :class="
@@ -73,7 +72,7 @@ onMounted(async () => {
         "
         @click="handleNav('next')"
       >
-        <ChevronRight class="w-4 h-4" />
+        <Icon name="uil:arrow-right" class="w-4 h-4" color="white" />
       </UiButton>
     </div>
     <ClientOnly>

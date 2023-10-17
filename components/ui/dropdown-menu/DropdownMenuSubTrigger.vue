@@ -3,7 +3,6 @@ import {
   DropdownMenuSubTrigger,
   type DropdownMenuSubTriggerProps,
 } from "radix-vue";
-import { ChevronRight } from "lucide-vue-next";
 
 const props = defineProps<DropdownMenuSubTriggerProps & { class?: string }>();
 </script>
@@ -19,6 +18,6 @@ const props = defineProps<DropdownMenuSubTriggerProps & { class?: string }>();
     ]"
   >
     <slot />
-    <ChevronRight class="w-4 h-4 ml-auto" />
+    <Icon name="uil:arrow-right" class="w-4 h-4 ml-auto" color="white" />
   </DropdownMenuSubTrigger>
 </template>

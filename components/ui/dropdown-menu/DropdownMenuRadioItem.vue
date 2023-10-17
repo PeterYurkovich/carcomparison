@@ -6,7 +6,6 @@ import {
   type DropdownMenuRadioItemProps,
   useEmitAsProps,
 } from "radix-vue";
-import { Circle } from "lucide-vue-next";
 
 const props = defineProps<DropdownMenuRadioItemProps & { class?: string }>();
 
@@ -25,7 +24,7 @@ const emits = defineEmits<DropdownMenuRadioItemEmits>();
   >
     <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuItemIndicator>
-        <Circle class="w-2 h-2 fill-current" />
+        <Icon name="uil:circle" class="w-2 h-2 fill-current" color="white" />
       </DropdownMenuItemIndicator>
     </span>
     <slot />
