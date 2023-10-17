@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
+</script>
+
 <template>
   <div class="md:hidden">
     <img
@@ -19,6 +24,11 @@
         <UiMainNav class="mx-6" />
         <div class="flex items-center ml-auto space-x-4">
           <UiSearch />
+          <Icon
+            :name="isDark ? 'uil:moon' : 'uil:sun'"
+            class="w-5 h-5 cursor-pointer text-muted-foreground"
+            @click="() => toggleDark()"
+          />
           <UiUserNav />
         </div>
       </div>
