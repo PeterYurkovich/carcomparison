@@ -1,13 +1,6 @@
-import tailwindcssAnimate from "tailwindcss-animate";
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "class",
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx,md}",
-    "./.vitepress/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  darkMode: ["class"],
   theme: {
     container: {
       center: true,
@@ -57,10 +50,6 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      boxShadow: {
-        switch:
-          "rgba(0, 0, 0, 0.3) 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 1px 2px",
-      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
@@ -70,22 +59,12 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-        "collapsible-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-collapsible-content-height)" },
-        },
-        "collapsible-up": {
-          from: { height: "var(--radix-collapsible-content-height)" },
-          to: { height: 0 },
-        },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-in-out",
-        "accordion-up": "accordion-up 0.2s ease-in-out",
-        "collapsible-down": "collapsible-down 0.2s ease-in-out",
-        "collapsible-up": "collapsible-up 0.2s ease-in-out",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [require("tailwindcss-animate")],
 };
