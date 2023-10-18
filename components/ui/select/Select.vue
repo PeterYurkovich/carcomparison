@@ -7,7 +7,7 @@ const emits = defineEmits<SelectRootEmits>();
 </script>
 
 <template>
-  <SelectRoot v-bind="{ ...props, ...useEmitAsProps(emits) }">
-    <slot />
-  </SelectRoot>
+    <SelectRoot v-bind="{ ...props, ...useEmitAsProps(emits) }">
+        <slot />
+    </SelectRoot>
 </template>

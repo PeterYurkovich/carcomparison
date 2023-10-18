@@ -9,17 +9,17 @@ const emitsAsProps = useEmitAsProps(emits);
 </script>
 
 <template>
-  <ComboboxRoot
-    v-bind="{ ...props, ...emitsAsProps }"
-    :open="true"
-    :model-value="''"
-    :class="
-      cn(
-        'flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50',
-        $attrs.class ?? ' '
-      )
-    "
-  >
-    <slot />
-  </ComboboxRoot>
+    <ComboboxRoot
+        v-bind="{ ...props, ...emitsAsProps }"
+        :open="true"
+        :model-value="''"
+        :class="
+            cn(
+                'flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50',
+                $attrs.class ?? ' '
+            )
+        "
+    >
+        <slot />
+    </ComboboxRoot>
 </template>

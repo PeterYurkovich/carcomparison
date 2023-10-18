@@ -9,7 +9,7 @@ const emitsAsProps = useEmitAsProps(emits);
 </script>
 
 <template>
-  <PopoverRoot v-bind="{ ...props, ...emitsAsProps }">
-    <slot />
-  </PopoverRoot>
+    <PopoverRoot v-bind="{ ...props, ...emitsAsProps }">
+        <slot />
+    </PopoverRoot>
 </template>

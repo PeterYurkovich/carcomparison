@@ -3,7 +3,7 @@ import { DialogRoot } from "radix-vue";
 </script>
 
 <template>
-  <DialogRoot>
-    <slot />
-  </DialogRoot>
+    <DialogRoot>
+        <slot />
+    </DialogRoot>
 </template>

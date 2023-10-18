@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1697659784834,
+      "tag": "0000_awesome_ben_urich",
+      "breakpoints": true
+    }
+  ]
+}
