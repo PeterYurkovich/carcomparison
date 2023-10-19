@@ -11,7 +11,7 @@ export const make = sqliteTable(
     "make",
     {
         id: integer("id").primaryKey(),
-        name: text("name"),
+        name: text("name").notNull(),
     },
     (make) => ({
         makeNameIdx: uniqueIndex("makeNameIdx").on(make.name),
@@ -34,11 +34,13 @@ export const model = sqliteTable(
                 "convertible",
                 "wagon",
             ],
-        }),
+        }).notNull(),
         driveType: text("drive_type", {
             enum: ["fwd", "rwd", "awd"],
-        }),
-        makeID: integer("make_id").references(() => make.id),
+        }).notNull(),
+        makeID: integer("make_id")
+            .references(() => make.id)
+            .notNull(),
     },
     (model) => ({
         modelNameIdx: uniqueIndex("modelNameIdx").on(model.name),
@@ -51,20 +53,22 @@ export const trim = sqliteTable(
     "trim",
     {
         id: integer("id").primaryKey(),
-        name: text("name"),
-        year: integer("year"),
-        cost: real("cost"),
+        name: text("name").notNull(),
+        year: integer("year").notNull(),
+        cost: real("cost").notNull(),
         cityMPG: integer("city_mpg"),
         highwayMPG: integer("highway_mpg"),
         electricRange: integer("electric_range"),
         transmission: text("transmission", {
             enum: ["manual", "automatic"],
-        }),
+        }).notNull(),
         cylinders: integer("cylinders"),
         fuelType: text("fuel_type", {
             enum: ["gasoline", "diesel", "electric", "hybrid", "plugin_hybrid"],
-        }),
-        modelID: integer("model_id").references(() => model.id),
+        }).notNull(),
+        modelID: integer("model_id")
+            .references(() => model.id)
+            .notNull(),
     },
     (trim) => ({
         trimNameIdx: uniqueIndex("trimNameIdx").on(trim.name),
@@ -85,9 +89,11 @@ export const feature = sqliteTable(
     "feature",
     {
         id: integer("id").primaryKey(),
-        name: text("name"),
-        typeID: integer("type_id").references(() => featureType.id),
-        cost: real("cost"),
+        name: text("name").notNull(),
+        typeID: integer("type_id")
+            .references(() => featureType.id)
+            .notNull(),
+        cost: real("cost").notNull(),
     },
     (feature) => ({
         featureNameIdx: uniqueIndex("featureNameIdx").on(feature.name),
@@ -100,7 +106,7 @@ export const featureType = sqliteTable(
     "feature_type",
     {
         id: integer("id").primaryKey(),
-        name: text("name"),
+        name: text("name").notNull(),
     },
     (featureType) => ({
         featureTypeNameIdx: uniqueIndex("featureTypeNameIdx").on(
@@ -115,10 +121,10 @@ export const color = sqliteTable(
         id: integer("id").primaryKey(),
         type: text("type", {
             enum: ["interior", "exterior"],
-        }),
+        }).notNull(),
         color: text("color", {
             enum: ["black", "white", "brown", "red", "blue"],
-        }),
+        }).notNull(),
     },
     (color) => ({
         colorTypeIdx: index("colorTypeIdx").on(color.type),
@@ -126,11 +132,32 @@ export const color = sqliteTable(
     })
 );
 
+export const material = sqliteTable(
+    "material",
+    {
+        id: integer("id").primaryKey(),
+        name: text("name").notNull(),
+    },
+    (material) => ({
+        materialNameIdx: uniqueIndex("materialNameIdx").on(material.name),
+    })
+);
+
+export const materialMap = sqliteTable("material_map", {
+    id: integer("id").primaryKey(),
+    colorID: integer("color_id")
+        .references(() => color.id)
+        .notNull(),
+    materialID: integer("material_id")
+        .references(() => material.id)
+        .notNull(),
+});
+
 export const featureMap = sqliteTable(
     "feature_map",
     {
         id: integer("id").primaryKey(),
-        cost: real("cost"),
+        cost: real("cost").notNull(),
         modelID: integer("model_id").references(() => model.id),
         trimID: integer("trim_id").references(() => trim.id),
         featureID: integer("feature_id")
@@ -146,9 +173,13 @@ export const colorMap = sqliteTable(
     "color_map",
     {
         id: integer("id").primaryKey(),
-        trimID: integer("trim_id").references(() => trim.id),
-        colorID: integer("color_id").references(() => color.id),
-        cost: real("cost"),
+        trimID: integer("trim_id")
+            .references(() => trim.id)
+            .notNull(),
+        colorID: integer("color_id")
+            .references(() => color.id)
+            .notNull(),
+        cost: real("cost").notNull(),
     },
     (colorMap) => ({
         colorMapCostIdx: index("colorMapCostIdx").on(colorMap.cost),
