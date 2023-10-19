@@ -2,19 +2,21 @@
 import tasks from "./tasks.json";
 import DataTable from "@/components/table/DataTable.vue";
 import { columns } from "@/components/table/columns";
+
+const isDark = useDark();
+const imageLink = computed(() =>
+    isDark.value ? "/examples/tasks-dark.png" : "/examples/tasks-light.png"
+);
 </script>
 
 <template>
     <div class="md:hidden">
-        <VPImage
+        <NuxtImg
             alt="Tasks"
             width="1280"
             height="1214"
             class="block"
-            :image="{
-                dark: '/examples/tasks-dark.png',
-                light: '/examples/tasks-light.png',
-            }"
+            :src="imageLink"
         />
     </div>
 

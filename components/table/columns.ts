@@ -6,6 +6,7 @@ import { Task } from "./schema";
 import DataTableColumnHeader from "./DataTableColumnHeader.vue";
 import DataTableRowActions from "./DataTableRowActions.vue";
 import { UiCheckbox, UiBadge } from "#components";
+import { Icon } from "#components";
 
 export const columns: ColumnDef<Task>[] = [
     {
@@ -46,14 +47,25 @@ export const columns: ColumnDef<Task>[] = [
                 (label) => label.value === row.original.label
             );
 
-            return h("div", { class: "flex space-x-2" }, [
-                label && h(UiBadge, { variant: "outline" }, label.label),
-                h(
-                    "span",
-                    { class: "max-w-[500px] truncate font-medium" },
-                    row.getValue("title")
-                ),
-            ]);
+            return h(
+                "div",
+                { class: "flex space-x-2" },
+                {
+                    default: () => [
+                        label &&
+                            h(
+                                UiBadge,
+                                { variant: "outline" },
+                                () => label.label
+                            ),
+                        h(
+                            "span",
+                            { class: "max-w-[500px] truncate font-medium" },
+                            row.getValue("title")
+                        ),
+                    ],
+                }
+            );
         },
     },
     {
@@ -68,13 +80,20 @@ export const columns: ColumnDef<Task>[] = [
 
             if (!status) return null;
 
-            return h("div", { class: "flex w-[100px] items-center" }, [
-                status.icon &&
-                    h(status.icon, {
-                        class: "mr-2 h-4 w-4 text-muted-foreground",
-                    }),
-                h("span", status.label),
-            ]);
+            return h(
+                "div",
+                { class: "flex w-[100px] items-center" },
+                {
+                    default: () => [
+                        status.icon &&
+                            h(Icon, {
+                                name: status.icon,
+                                class: "mr-2 h-4 w-4 text-muted-foreground",
+                            }),
+                        h("span", status.label),
+                    ],
+                }
+            );
         },
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id));
@@ -91,13 +110,20 @@ export const columns: ColumnDef<Task>[] = [
 
             if (!priority) return null;
 
-            return h("div", { class: "flex items-center" }, [
-                priority.icon &&
-                    h(priority.icon, {
-                        class: "mr-2 h-4 w-4 text-muted-foreground",
-                    }),
-                h("span", priority.label),
-            ]);
+            return h(
+                "div",
+                { class: "flex items-center" },
+                {
+                    default: () => [
+                        priority.icon &&
+                            h(Icon, {
+                                name: priority.icon,
+                                class: "mr-2 h-4 w-4 text-muted-foreground",
+                            }),
+                        h("span", priority.label),
+                    ],
+                }
+            );
         },
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id));

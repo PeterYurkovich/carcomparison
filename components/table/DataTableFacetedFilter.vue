@@ -9,7 +9,7 @@ interface DataTableFacetedFilter {
     options: {
         label: string;
         value: string;
-        icon?: Component;
+        icon?: string;
     }[];
 }
 
@@ -109,8 +109,9 @@ const selectedValues = computed(
                             >
                                 <Icon name="uil:check" :class="cn('h-4 w-4')" />
                             </div>
-                            <option.icon
+                            <Icon
                                 v-if="option.icon"
+                                :name="option.icon"
                                 class="w-4 h-4 mr-2 text-muted-foreground"
                             />
                             <span>{{ option.label }}</span>

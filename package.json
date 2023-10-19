@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "rc",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@popperjs/core": "^2.11.8",
     "@tanstack/vue-table": "^8.10.7",
