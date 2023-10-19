@@ -18,6 +18,6 @@ const props = defineProps<DropdownMenuSubTriggerProps & { class?: string }>();
         ]"
     >
         <slot />
-        <Icon name="uil:arrow-right" class="w-4 h-4 ml-auto" color="white" />
+        <Icon name="uil:angle-right" class="w-4 h-4 ml-auto" color="white" />
     </DropdownMenuSubTrigger>
 </template>

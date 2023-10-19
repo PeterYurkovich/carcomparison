@@ -26,7 +26,7 @@ const props = withDefaults(
         <slot />
         <SelectIcon as-child>
             <Icon
-                name="uil:arrow-down"
+                name="uil:angle-down"
                 class="w-4 h-4 opacity-50"
                 color="white"
             />

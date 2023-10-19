@@ -61,7 +61,7 @@ onMounted(async () => {
                 "
                 @click="handleNav('prev')"
             >
-                <Icon name="uil:arrow-left" class="w-4 h-4" color="white" />
+                <Icon name="uil:angle-left" class="w-4 h-4" color="white" />
             </UiButton>
             <UiButton
                 :class="
@@ -72,7 +72,7 @@ onMounted(async () => {
                 "
                 @click="handleNav('next')"
             >
-                <Icon name="uil:arrow-right" class="w-4 h-4" color="white" />
+                <Icon name="uil:angle-right" class="w-4 h-4" color="white" />
             </UiButton>
         </div>
         <ClientOnly>

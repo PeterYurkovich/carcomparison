@@ -34,7 +34,7 @@ const emitsAsProps = useEmitAsProps(emits);
             <DialogClose
                 class="absolute top-3 right-3 p-0.5 transition-colors rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800"
             >
-                <Icon name="uil:x" class="w-4 h-4" />
+                <Icon name="uil:multiply" class="w-4 h-4" />
                 <span class="sr-only">Close</span>
             </DialogClose>
         </DialogContent>
