@@ -14,6 +14,11 @@ export default defineNuxtConfig({
             extensions: ["vue"],
             prefix: "Ui",
         },
+        {
+            path: "~/components/pyn",
+            extensions: ["vue"],
+            prefix: "Pyn",
+        },
     ],
     tailwindcss: {
         config: {

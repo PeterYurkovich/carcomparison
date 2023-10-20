@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import tasks from "./tasks.json";
-import DataTable from "@/components/table/DataTable.vue";
-import { columns } from "@/components/table/columns";
+import { trims } from "./trimsData";
+import DataTable from "@/components/pyn/DataTable/DataTable.vue";
+import { columns } from "@/components/pyn/DataTable/columns";
 
 const isDark = useDark();
 const imageLink = computed(() =>
@@ -32,6 +32,6 @@ const imageLink = computed(() =>
                 <UiUserNav />
             </div>
         </div>
-        <DataTable :data="tasks" :columns="columns" />
+        <DataTable :data="trims" :columns="columns" />
     </div>
 </template>
