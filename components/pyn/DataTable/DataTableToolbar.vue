@@ -1,12 +1,25 @@
 <script setup lang="ts" generic="T">
 import { Table } from "@tanstack/vue-table";
 
-import { fuelTypes, transmissions } from "./data";
+import { trim } from "~/drizzle/schema";
+
 import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
 import DataTableViewOptions from "./DataTableViewOptions.vue";
+import { IconCellColumn } from "~/components/pyn/DataTable/cells/CellTypes";
+
+type FilterOption<S> = {
+    columnName: string;
+    options: IconCellColumn<S>;
+};
+
+type FilterOptions = Array<
+    | FilterOption<typeof trim.$inferInsert.transmission>
+    | FilterOption<typeof trim.$inferInsert.fuelType>
+>;
 
 interface DataTableToolbarProps {
     table: Table<T>;
+    filterOptions: FilterOptions;
 }
 
 const props = defineProps<DataTableToolbarProps>();
@@ -29,18 +42,14 @@ const isFiltered = computed(
                     table.getColumn('name')?.setFilterValue($event.target.value)
                 "
             />
-            <DataTableFacetedFilter
-                v-if="table.getColumn('fuelType')"
-                :column="table.getColumn('fuelType')"
-                title="Fuel Type"
-                :options="fuelTypes"
-            />
-            <DataTableFacetedFilter
-                v-if="table.getColumn('transmission')"
-                :column="table.getColumn('transmission')"
-                title="Transmission"
-                :options="transmissions"
-            />
+            <template v-for="filter in props.filterOptions">
+                <DataTableFacetedFilter
+                    v-if="table.getColumn(filter.columnName)"
+                    :column="table.getColumn(filter.columnName)"
+                    :title="filter.columnName"
+                    :options="filter.options"
+                />
+            </template>
 
             <UiButton
                 v-if="isFiltered"

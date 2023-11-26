@@ -19,6 +19,7 @@ import {
 import { Trim } from "./schema";
 import DataTablePagination from "./DataTablePagination.vue";
 import DataTableToolbar from "./DataTableToolbar.vue";
+import { transmissions, fuelTypes } from "./data";
 
 interface DataTableProps {
     columns: ColumnDef<T, any>[];
@@ -30,6 +31,16 @@ const sorting = ref<SortingState>([]);
 const columnFilters = ref<ColumnFiltersState>([]);
 const columnVisibility = ref<VisibilityState>({});
 const rowSelection = ref({});
+const filters = ref([
+    {
+        columnName: "transmission",
+        options: transmissions,
+    },
+    {
+        columnName: "fuelType",
+        options: fuelTypes,
+    },
+]);
 
 const table = useVueTable({
     data: props.data,
@@ -67,7 +78,7 @@ const table = useVueTable({
 
 <template>
     <div class="space-y-4">
-        <DataTableToolbar :table="table" />
+        <DataTableToolbar :table="table" :filter-options="filters" />
         <div class="border rounded-md">
             <UiTable>
                 <UiTableHeader>
