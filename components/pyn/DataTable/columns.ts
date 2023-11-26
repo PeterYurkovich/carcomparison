@@ -6,8 +6,8 @@ import { Trim } from "./schema";
 import DataTableColumnHeader from "./DataTableColumnHeader.vue";
 import DataTableRowActions from "./DataTableRowActions.vue";
 import { UiCheckbox } from "#components";
-import { Icon } from "#components";
 import { formatMoneyUsd } from "~/utils";
+import CellFactory from "./cells/CellFactory.vue";
 
 export const columns: ColumnDef<Trim>[] = [
     {
@@ -35,7 +35,7 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Trim" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("name")),
+            h(CellFactory, { cellType: "text", value: row.getValue("name") }),
         enableSorting: true,
         enableHiding: false,
     },
@@ -44,7 +44,7 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Year" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("year")),
+            h(CellFactory, { cellType: "text", value: row.getValue("year") }),
         enableSorting: true,
         enableHiding: false,
     },
@@ -53,11 +53,11 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Cost" }),
         cell: ({ row }) =>
-            h(
-                "div",
-                { class: "w-[80px]" },
-                formatMoneyUsd(row.getValue("cost"))
-            ),
+            h(CellFactory, {
+                cellType: "format",
+                value: row.getValue("cost"),
+                format: formatMoneyUsd,
+            }),
         enableSorting: true,
         enableHiding: false,
     },
@@ -67,28 +67,11 @@ export const columns: ColumnDef<Trim>[] = [
             h(DataTableColumnHeader, { column, title: "Transmission" }),
 
         cell: ({ row }) => {
-            const transmission = transmissions.find(
-                (transmission) =>
-                    transmission.value === row.original.transmission
-            );
-
-            if (!transmission) {
-                return h("span", "Unknown");
-            }
-
-            return h(
-                "div",
-                { class: "flex space-x-2" },
-                {
-                    default: () => [
-                        h(Icon, {
-                            name: transmission.icon,
-                            class: "mr-2 h-4 w-4 text-muted-foreground",
-                        }),
-                        h("span", transmission.label),
-                    ],
-                }
-            );
+            return h(CellFactory<Trim["transmission"]>, {
+                cellType: "icon",
+                value: row.getValue("transmission"),
+                options: transmissions,
+            });
         },
         enableSorting: true,
         enableHiding: true,
@@ -102,27 +85,11 @@ export const columns: ColumnDef<Trim>[] = [
             h(DataTableColumnHeader, { column, title: "Fuel Type" }),
 
         cell: ({ row }) => {
-            const fuelType = fuelTypes.find(
-                (fuelType) => fuelType.value === row.original.fuelType
-            );
-
-            if (!fuelType) {
-                return h("span", "Unknown");
-            }
-
-            return h(
-                "div",
-                { class: "flex space-x-2" },
-                {
-                    default: () => [
-                        h(Icon, {
-                            name: fuelType.icon,
-                            class: "mr-2 h-4 w-4 text-muted-foreground",
-                        }),
-                        h("span", fuelType.label),
-                    ],
-                }
-            );
+            return h(CellFactory<Trim["fuelType"]>, {
+                cellType: "icon",
+                value: row.getValue("fuelType"),
+                options: fuelTypes,
+            });
         },
         enableSorting: true,
         enableHiding: false,
@@ -135,7 +102,10 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "City MPG" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("cityMPG")),
+            h(CellFactory, {
+                cellType: "text",
+                value: row.getValue("cityMPG"),
+            }),
         enableSorting: true,
         enableHiding: true,
     },
@@ -144,7 +114,10 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Highway MPG" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("highwayMPG")),
+            h(CellFactory, {
+                cellType: "text",
+                value: row.getValue("highwayMPG"),
+            }),
         enableSorting: true,
         enableHiding: true,
     },
@@ -153,7 +126,10 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Electric Range" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("electricRange")),
+            h(CellFactory, {
+                cellType: "text",
+                value: row.getValue("electricRange"),
+            }),
         enableSorting: true,
         enableHiding: true,
     },
@@ -162,7 +138,10 @@ export const columns: ColumnDef<Trim>[] = [
         header: ({ column }) =>
             h(DataTableColumnHeader, { column, title: "Cylinders" }),
         cell: ({ row }) =>
-            h("div", { class: "w-[80px]" }, row.getValue("cylinders")),
+            h(CellFactory, {
+                cellType: "text",
+                value: row.getValue("cylinders"),
+            }),
         enableSorting: true,
         enableHiding: true,
     },
