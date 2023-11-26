@@ -2,12 +2,12 @@ import type { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 
 import { transmissions, fuelTypes } from "./data";
-import { Trim } from "./schema";
-import DataTableColumnHeader from "./DataTableColumnHeader.vue";
-import DataTableRowActions from "./DataTableRowActions.vue";
+import { Trim } from "~/components/pyn/DataTable/schema";
+import DataTableColumnHeader from "~/components/pyn/DataTable//DataTableColumnHeader.vue";
+import DataTableRowActions from "~/components/pyn/DataTable//DataTableRowActions.vue";
 import { UiCheckbox } from "#components";
 import { formatMoneyUsd } from "~/utils";
-import CellFactory from "./cells/CellFactory.vue";
+import CellFactory from "~/components/pyn/DataTable//cells/CellFactory.vue";
 
 export const columns: ColumnDef<Trim>[] = [
     {

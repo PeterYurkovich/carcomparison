@@ -1,8 +1,10 @@
-type IconCellOption<T> = {
+export type IconCellOption<T> = {
     value: T;
     label: string;
     icon: string;
 };
+export type IconCellColumn<T> = Array<IconCellOption<T>>;
+
 export type IconCellProps<T> = {
     value: T | null;
     options: Array<IconCellOption<T>>;

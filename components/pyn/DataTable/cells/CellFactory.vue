@@ -2,7 +2,7 @@
 import IconCell from "./IconCell.vue";
 import FormatCell from "./FormatCell.vue";
 import TextCell from "./TextCell.vue";
-import { IconCellProps, FormatCellProps, TextCellProps } from "./CellPropTypes";
+import { IconCellProps, FormatCellProps, TextCellProps } from "./CellTypes";
 type IconCellFactoryProps<T> = IconCellProps<T> & {
     cellType: "icon";
 };

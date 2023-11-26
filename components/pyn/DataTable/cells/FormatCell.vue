@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { FormatCellProps } from "./CellPropTypes";
+import { FormatCellProps } from "./CellTypes";
 const props = defineProps<FormatCellProps<T>>();
 
 const formattedValue = computed(() => {

@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { IconCellProps } from "./CellPropTypes";
+import { IconCellProps } from "./CellTypes";
 const props = defineProps<IconCellProps<T>>();
 
 const matchingOption = computed(() => {

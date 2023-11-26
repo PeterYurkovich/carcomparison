@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { TextCellProps } from "./CellPropTypes";
+import { TextCellProps } from "./CellTypes";
 defineProps<TextCellProps<T>>();
 </script>
 

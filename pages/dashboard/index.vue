@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { trims } from "./trimsData";
 import DataTable from "@/components/pyn/DataTable/DataTable.vue";
-import { columns } from "@/components/pyn/DataTable/columns";
+import { columns } from "./columns";
 
 const isDark = useDark();
 const imageLink = computed(() =>
