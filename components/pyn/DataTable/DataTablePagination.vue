@@ -1,9 +1,8 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import { type Table } from "@tanstack/vue-table";
-import { type Trim } from "./schema";
 
 interface DataTablePaginationProps {
-    table: Table<Trim>;
+    table: Table<T>;
 }
 defineProps<DataTablePaginationProps>();
 </script>

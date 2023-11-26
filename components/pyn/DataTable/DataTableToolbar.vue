@@ -1,13 +1,12 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import { Table } from "@tanstack/vue-table";
-import { Trim } from "./schema";
 
 import { fuelTypes, transmissions } from "./data";
 import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
 import DataTableViewOptions from "./DataTableViewOptions.vue";
 
 interface DataTableToolbarProps {
-    table: Table<Trim>;
+    table: Table<T>;
 }
 
 const props = defineProps<DataTableToolbarProps>();

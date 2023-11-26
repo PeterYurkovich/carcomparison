@@ -1,9 +1,8 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import type { Table } from "@tanstack/vue-table";
-import { Trim } from "./schema";
 
 interface DataTableViewOptionsProps {
-    table: Table<Trim>;
+    table: Table<T>;
 }
 
 const props = defineProps<DataTableViewOptionsProps>();

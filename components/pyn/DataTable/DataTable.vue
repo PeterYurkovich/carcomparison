@@ -21,8 +21,8 @@ import DataTablePagination from "./DataTablePagination.vue";
 import DataTableToolbar from "./DataTableToolbar.vue";
 
 interface DataTableProps {
-    columns: ColumnDef<Trim, any>[];
-    data: Trim[];
+    columns: ColumnDef<T, any>[];
+    data: T[];
 }
 const props = defineProps<DataTableProps>();
 
