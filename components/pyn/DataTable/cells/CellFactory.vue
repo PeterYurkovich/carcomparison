@@ -2,35 +2,65 @@
 import IconCell from "./IconCell.vue";
 import FormatCell from "./FormatCell.vue";
 import TextCell from "./TextCell.vue";
-import { IconCellProps, FormatCellProps, TextCellProps } from "./CellTypes";
-type IconCellFactoryProps<T> = IconCellProps<T> & {
-    cellType: "icon";
-};
+import {
+    IconCellProps,
+    FormatCellProps,
+    TextCellProps,
+    IconCellOption,
+} from "./CellTypes";
 
-type FormatCellFactoryProps<T> = FormatCellProps<T> & {
-    cellType: "format";
-};
+const props = defineProps({
+    cellType: {
+        type: String,
+        required: true,
+    },
+    value: {
+        type: [String, Number, Boolean, Object],
+        default: null,
+    },
+    format: {
+        type: Function,
+        default: () => (value: any) => value,
+    },
+    icon: {
+        type: String,
+        default: null,
+    },
+    options: {
+        type: Array,
+        default: () => [],
+    },
+});
 
-type TextCellFactoryProps<T> = TextCellProps<T> & {
-    cellType: "text";
-};
+const iconCellProps: ComputedRef<IconCellProps<T>> = computed(() => {
+    return {
+        value: props.value as T,
+        options: props.options as Array<IconCellOption<T>>,
+    };
+});
 
-type CellFactoryProps<T> =
-    | IconCellFactoryProps<T>
-    | FormatCellFactoryProps<T>
-    | TextCellFactoryProps<T>;
+const formatCellProps: ComputedRef<FormatCellProps<T>> = computed(() => {
+    return {
+        value: props.value as T,
+        format: props.format as <T>(x: T) => string,
+    };
+});
 
-const props = defineProps<CellFactoryProps<T>>();
+const textCellProps: ComputedRef<TextCellProps<T>> = computed(() => {
+    return {
+        value: props.value as T,
+    };
+});
 </script>
 
 <template>
     <template v-if="props.cellType === 'icon'">
-        <IconCell v-bind="props" />
+        <IconCell v-bind="iconCellProps" />
     </template>
     <template v-else-if="props.cellType === 'format'">
-        <FormatCell v-bind="props" />
+        <FormatCell v-bind="formatCellProps" />
     </template>
     <template v-else-if="props.cellType === 'text'">
-        <TextCell v-bind="props" />
+        <TextCell v-bind="textCellProps" />
     </template>
 </template>

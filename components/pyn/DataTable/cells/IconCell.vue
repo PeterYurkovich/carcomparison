@@ -5,7 +5,6 @@ const props = defineProps<IconCellProps<T>>();
 const matchingOption = computed(() => {
     const match = props.options.find((i) => i.value === props.value);
     if (match) {
-        console.log(match);
         return match;
     }
     console.error("No matching option found for value", props.value);
