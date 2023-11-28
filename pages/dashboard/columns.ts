@@ -33,7 +33,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "name",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Trim" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Trim" }),
         cell: ({ row }) =>
             h(CellFactory, { cellType: "text", value: row.getValue("name") }),
         enableSorting: true,
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "year",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Year" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Year" }),
         cell: ({ row }) =>
             h(CellFactory, { cellType: "text", value: row.getValue("year") }),
         enableSorting: true,
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "cost",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Cost" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Cost" }),
         cell: ({ row }) =>
             h(CellFactory, {
                 cellType: "format",
@@ -64,7 +64,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "transmission",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Transmission" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Transmission" }),
 
         cell: ({ row }) => {
             return h(CellFactory<Trim["transmission"]>, {
@@ -78,11 +78,17 @@ export const columns: ColumnDef<Trim>[] = [
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id));
         },
+        meta: {
+            filter: {
+                title: "Transmission",
+                options: transmissions,
+            },
+        },
     },
     {
         accessorKey: "fuelType",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Fuel Type" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Fuel Type" }),
 
         cell: ({ row }) => {
             return h(CellFactory<Trim["fuelType"]>, {
@@ -96,11 +102,17 @@ export const columns: ColumnDef<Trim>[] = [
         filterFn: (row, id, value) => {
             return value.includes(row.getValue(id));
         },
+        meta: {
+            filter: {
+                title: "Fuel Type",
+                options: fuelTypes,
+            },
+        },
     },
     {
         accessorKey: "cityMPG",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "City MPG" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "City MPG" }),
         cell: ({ row }) =>
             h(CellFactory, {
                 cellType: "text",
@@ -112,7 +124,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "highwayMPG",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Highway MPG" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Highway MPG" }),
         cell: ({ row }) =>
             h(CellFactory, {
                 cellType: "text",
@@ -124,7 +136,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "electricRange",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Electric Range" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Electric Range" }),
         cell: ({ row }) =>
             h(CellFactory, {
                 cellType: "text",
@@ -136,7 +148,7 @@ export const columns: ColumnDef<Trim>[] = [
     {
         accessorKey: "cylinders",
         header: ({ column }) =>
-            h(DataTableColumnHeader, { column, title: "Cylinders" }),
+            h(DataTableColumnHeader<Trim>, { column, title: "Cylinders" }),
         cell: ({ row }) =>
             h(CellFactory, {
                 cellType: "text",

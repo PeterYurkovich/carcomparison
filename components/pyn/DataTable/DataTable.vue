@@ -16,15 +16,29 @@ import {
     useVueTable,
 } from "@tanstack/vue-table";
 
-import { Trim } from "./schema";
 import DataTablePagination from "./DataTablePagination.vue";
 import DataTableToolbar from "./DataTableToolbar.vue";
 import { transmissions, fuelTypes } from "./data";
+import {
+    IconCellColumn,
+    IconCellOption,
+} from "~/components/pyn/DataTable/cells/CellTypes";
 
 interface DataTableProps {
     columns: ColumnDef<T, any>[];
     data: T[];
 }
+type MetaFilters = {
+    filter: {
+        title: string;
+        options: Array<IconCellOption<T>>;
+    };
+};
+
+type FilterOption<S> = {
+    label: string;
+    options: Array<IconCellOption<S>>;
+};
 const props = defineProps<DataTableProps>();
 
 const sorting = ref<SortingState>([]);
@@ -41,6 +55,22 @@ const filters = ref([
         options: fuelTypes,
     },
 ]);
+
+const filteredColumns = computed(() => {
+    return props.columns.filter((column) => {
+        return !!column.filterFn;
+    });
+});
+
+const metaFilteredColumns = computed((): Array<FilterOption<T>> => {
+    return filteredColumns.value.map((column) => {
+        const meta = column.meta as MetaFilters;
+        return {
+            label: meta.filter.title,
+            options: meta.filter.options,
+        } as FilterOption<T>;
+    });
+});
 
 const table = useVueTable({
     data: props.data,
@@ -78,7 +108,10 @@ const table = useVueTable({
 
 <template>
     <div class="space-y-4">
-        <DataTableToolbar :table="table" :filter-options="filters" />
+        <DataTableToolbar
+            :table="table"
+            :filter-options="metaFilteredColumns"
+        />
         <div class="border rounded-md">
             <UiTable>
                 <UiTableHeader>

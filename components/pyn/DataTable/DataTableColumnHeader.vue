@@ -1,9 +1,8 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import type { Column } from "@tanstack/vue-table";
-import { Trim } from "./schema";
 
 interface DataTableColumnHeaderProps {
-    column: Column<Trim, any>;
+    column: Column<T, any>;
     title: string;
 }
 

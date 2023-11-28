@@ -1,21 +1,16 @@
 <script setup lang="ts" generic="T">
 import { Table } from "@tanstack/vue-table";
 
-import { trim } from "~/drizzle/schema";
-
 import DataTableFacetedFilter from "./DataTableFacetedFilter.vue";
 import DataTableViewOptions from "./DataTableViewOptions.vue";
-import { IconCellColumn } from "~/components/pyn/DataTable/cells/CellTypes";
+import { IconCellOption } from "~/components/pyn/DataTable/cells/CellTypes";
 
 type FilterOption<S> = {
-    columnName: string;
-    options: IconCellColumn<S>;
+    label: string;
+    options: Array<IconCellOption<S>>;
 };
 
-type FilterOptions = Array<
-    | FilterOption<typeof trim.$inferInsert.transmission>
-    | FilterOption<typeof trim.$inferInsert.fuelType>
->;
+type FilterOptions = Array<FilterOption<T>>;
 
 interface DataTableToolbarProps {
     table: Table<T>;
@@ -44,9 +39,9 @@ const isFiltered = computed(
             />
             <template v-for="filter in props.filterOptions">
                 <DataTableFacetedFilter
-                    v-if="table.getColumn(filter.columnName)"
-                    :column="table.getColumn(filter.columnName)"
-                    :title="filter.columnName"
+                    v-if="table.getColumn(filter.label)"
+                    :column="table.getColumn(filter.label)"
+                    :title="filter.label"
                     :options="filter.options"
                 />
             </template>

@@ -1,14 +1,11 @@
 <script setup lang="ts" generic="T">
 import type { Column } from "@tanstack/vue-table";
+import { IconCellOption } from "~/components/pyn/DataTable/cells/CellTypes";
 
 interface DataTableFacetedFilter {
     column?: Column<T, any>;
     title?: string;
-    options: {
-        label: string;
-        value: string;
-        icon?: string;
-    }[];
+    options: Array<IconCellOption<T>>;
 }
 
 const props = defineProps<DataTableFacetedFilter>();
@@ -52,9 +49,9 @@ const filteredFunction = (
                         <template v-else>
                             <UiBadge
                                 v-for="option in options.filter((option) =>
-                                    selectedValues.has(option.value)
+                                    selectedValues.has(String(option.value))
                                 )"
-                                :key="option.value"
+                                :key="String(option.value)"
                                 variant="secondary"
                                 class="px-1 font-normal rounded-sm"
                             >
@@ -73,17 +70,21 @@ const filteredFunction = (
                     <UiCommandGroup>
                         <UiCommandItem
                             v-for="option in options"
-                            :key="option.value"
+                            :key="String(option.value)"
                             :value="option"
                             @select="
                                 () => {
                                     const isSelected = selectedValues.has(
-                                        option.value
+                                        String(option.value)
                                     );
                                     if (isSelected) {
-                                        selectedValues.delete(option.value);
+                                        selectedValues.delete(
+                                            String(option.value)
+                                        );
                                     } else {
-                                        selectedValues.add(option.value);
+                                        selectedValues.add(
+                                            String(option.value)
+                                        );
                                     }
                                     const filterValues =
                                         Array.from(selectedValues);
@@ -99,7 +100,7 @@ const filteredFunction = (
                                 :class="
                                     cn(
                                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                                        selectedValues.has(option.value)
+                                        selectedValues.has(String(option.value))
                                             ? 'bg-primary text-primary-foreground'
                                             : 'opacity-50 [&_svg]:invisible'
                                     )

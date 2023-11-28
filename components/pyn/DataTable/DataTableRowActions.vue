@@ -1,8 +1,7 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import type { Row } from "@tanstack/vue-table";
-import { type Trim } from "./schema";
 interface DataTableRowActionsProps {
-    row: Row<Trim>;
+    row: Row<T>;
 }
 defineProps<DataTableRowActionsProps>();
 </script>
